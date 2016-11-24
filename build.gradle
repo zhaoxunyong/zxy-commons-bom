@@ -1,0 +1,63 @@
+buildscript {
+    repositories {
+        maven {
+            url groupUrl
+//            url "http://dl.bintray.com/eddgrant/maven"
+        }
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE"
+//        classpath 'com.eddgrant:maven-password-decrypter:0.0.4'
+    }
+}
+
+apply from: 'common.gradle'
+apply from: 'dependency.gradle'
+
+//def mpd = new com.eddgrant.mpd.MavenPasswordDecrypter()
+//ext.decryptMasterPassword = mpd.getDecryptPassword(password, settingsSecurity)
+//println "decryptMasterPassword===${decryptMasterPassword}"
+
+ext {
+    // maven user and password
+    user = username
+//    pwd = decryptMasterPassword
+    pwd = password
+}
+
+dependencyManagement {
+    imports {
+         mavenBom "org.springframework:spring-framework-bom:${spring_bom_version}"
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            credentials {
+                username user
+                password pwd
+            }
+            if (version.endsWith('-SNAPSHOT')){
+                url "${snapshotsUrl}"
+            } else {
+                url "${releaseUrl}"
+            }
+//            url "file:///Developer/repo"
+        }
+    }
+//    publications {
+//        maven(MavenPublication) {
+////            from components.java
+////            artifact (sourceJar) {
+////                classifier = 'sources'
+////    //          extension "zip"
+////            }
+//        }
+//    }
+    publications {
+        mavenCustom(MavenPublication) {
+            withXml(pom)
+        }
+    }
+}

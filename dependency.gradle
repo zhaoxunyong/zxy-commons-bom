@@ -1,0 +1,233 @@
+dependencyManagement {
+    dependencies {
+        // modelmapper dependencies
+        dependency "org.modelmapper:modelmapper:${modelmapper_version}"
+        
+        // slf4j dependencies
+        dependencySet(group: "org.slf4j", version: "${slf4j_version}") {
+            entry "slf4j-api"
+            entry "slf4j-log4j12"
+            entry "log4j-over-slf4j"
+        }
+        
+        // logback dependencies
+        dependencySet(group: "ch.qos.logback", version: "${logback_version}") {
+            entry "logback-access"
+            entry "logback-classic"
+        }
+        
+        // guava dependencies
+        dependency "com.google.guava:guava:${guava_version}"
+        
+        // httpcomponents dependencies
+        dependencySet(group: "org.apache.httpcomponents", version: "${httpcomponents_version}") {
+            entry "httpclient"
+            entry "httpmime"
+        }
+        
+        // snakeyaml dependencies
+        dependency "org.yaml:snakeyaml:${snakeyaml_version}"
+        
+        // uuid dependencies
+        dependency "com.eaio.uuid:uuid:${uuid_version}"
+        
+        // bcprov dependencies
+        dependency "bouncycastle:bcprov-jdk16:${bcprov_version}"
+        
+        // commons-lang dependencies
+        dependency "commons-lang:commons-lang:${commons_lang_version}"
+        // commons-net dependencies
+        dependency "commons-net:commons-net:${commons_net_version}"
+        // commons-io dependencies
+        dependency "commons-io:commons-io:${commons_io_version}"
+        // commons-codec dependencies
+        dependency "commons-codec:commons-codec:${commons_codec_version}"
+        // commons-cli dependencies
+        dependency "commons-cli:commons-cli:${commons_cli_version}"
+        // commons-beanutils dependencies
+        dependency "commons-beanutils:commons-beanutils:${commons_beanutils_version}"
+        // commons-email dependencies
+        dependency "org.apache.commons:commons-email:${commons_email_version}"
+        // commons-exec dependencies
+        dependency "org.apache.commons:commons-exec:${commons_exec_version}"
+        // commons-pool2 dependencies
+        dependency "org.apache.commons:commons-pool2:${commons_pool2_version}"
+        
+        // jackson dependencies
+        dependencySet(group: "com.fasterxml.jackson.core", version: "${jackson_version}") {
+            entry "jackson-core"
+            entry "jackson-annotations"
+            entry "jackson-databind"
+        }
+        // jackson-mapper-asl dependencies
+        dependency "org.codehaus.jackson:jackson-mapper-asl:${jackson_mapper_asl_version}"
+        
+        // fastjson
+        dependency "com.alibaba:fastjson:${fastjson_version}"
+        
+        // xmemcached dependencies
+        dependency "com.googlecode.xmemcached:xmemcached:${xmemcached_version}"
+        
+        // kafka dependencies
+        dependency("org.apache.kafka:kafka_2.11:${kafka_version}") {
+            exclude('org.slf4j:slf4j-log4j12')
+        }
+        // druid dependencies
+        dependency "com.alibaba:druid:${druid_version}"
+        
+        // mysql connetor dependencies
+        dependency "mysql:mysql-connector-java:${mysql_connector_version}"
+        
+        // spring mybatis dependencies
+        dependency "org.mybatis:mybatis-spring:${mybatis_spring_version}"
+        // mybatis dependencies
+        dependency "org.mybatis:mybatis:${mybatis_version}"
+        
+        // quartz dependencies
+        dependency("org.quartz-scheduler:quartz:${quartz_version}") {
+            exclude('c3p0:c3p0')
+        }
+        
+        // jedis dependencies
+        dependency "redis.clients:jedis:${jedis_version}"
+        
+        // spring-bom dependencies
+//        imports {
+//            mavenBom "org.springframework:spring-framework-bom:${spring_bom_version}"
+//        }
+        // spring data redis dependencies
+        dependency "org.springframework.data:spring-data-redis:${spring_data_redis_version}"
+
+        // spring data mongodb dependencies
+        dependency "org.springframework.data:spring-data-mongodb:${spring_data_mongodb_version}"
+
+        // spring session dependencies
+        dependencySet(group: "org.springframework.session", version: "${spring_session_version}") {
+            entry "spring-session"
+            entry "spring-session-data-redis"
+        }
+
+        // spring security dependencies
+        dependencySet(group: "org.springframework.security", version: "${spring_security_version}") {
+            entry "spring-security-web"
+            entry "spring-security-config"
+        }
+
+        // shiro
+        dependency "org.apache.shiro:shiro-spring:${shiro_spring_version}"
+        dependency "org.crazycake:shiro-redis:${shiro_redis_version}"
+
+        //spring retry dependencies
+        dependency "org.springframework.retry:spring-retry:${spring_retry_version}"
+        // aspectjrt dependencies
+        dependencySet(group: "org.aspectj", version: "${aspectj_version}") {
+            entry "aspectjrt"
+            entry "aspectjweaver"
+        }
+        
+        // servlet-api dependencies
+        dependency "javax.servlet:javax.servlet-api:${servlet_api_version}"
+        // jsp-api dependencies
+        dependency "javax.servlet.jsp:javax.servlet.jsp-api:${jsp_api_version}"
+        
+        // zookeeper dependencies
+        dependency("org.apache.zookeeper:zookeeper:${zookeeper_version}") {
+            exclude('org.slf4j:slf4j-log4j12')
+        }
+        // zkclient dependencies
+        dependency("com.101tec:zkclient:${zkclient_version}") {
+            exclude('org.slf4j:slf4j-log4j12')
+        }
+        // curator dependencies
+        dependencySet(group: "org.apache.curator", version: "${curator_version}") {
+            entry "curator-framework"
+            entry "curator-client"
+            entry "curator-recipes"
+            
+        }
+        
+        // rxjava depenencies
+        dependency "io.reactivex:rxjava:${rxjava_version}"
+        
+        // dubbo dependencies
+        dependency("com.alibaba:dubbo:${dubbo_version}") {
+            exclude('org.javassist:javassist')
+        }
+        
+        // javassist dependencies
+        dependency "org.javassist:javassist:${javassist_version}"
+        
+        // baidu velocity dependencies
+        dependency "com.baidu:fis-velocity-tools:${fis_velocity_tools_version}"
+        // velocity dependencies
+        dependency "org.apache.velocity:velocity:${velocity_version}"
+        dependency("org.apache.velocity:velocity-tools:${velocity_tools_version}") {
+            exclude('javax.servlet:servlet-api')
+        }
+        
+        // jetty dependencies
+        dependencySet(group: "org.eclipse.jetty", version: "${jetty_version}") {
+            entry "jetty-server"
+            entry "jetty-webapp"
+            entry "jetty-continuation"
+            entry "jetty-jsp"
+        }
+        
+        // resteasy dependencies
+        dependencySet(group: "org.jboss.resteasy", version: "${resteasy_version}") {
+            entry "resteasy-jaxrs"
+            entry "resteasy-client"
+            entry "resteasy-jackson-provider"
+            entry "resteasy-jaxb-provider"
+            entry "resteasy-netty"
+            entry "resteasy-jdk-http"
+        }
+        
+        // validation dependencies
+        dependency "javax.validation:validation-api:${validation_version}"
+        
+        // tomcat jdbc dependencies
+        dependency "org.apache.tomcat:tomcat-jdbc:${tomcat_jdbc_version}"
+        // tomcat embed dependencies
+        dependencySet(group: "org.apache.tomcat.embed", version: "${tomcat_embed_version}") {
+            entry "tomcat-embed-core"
+            entry "tomcat-embed-logging-juli"
+        }
+        
+        // serializer dependencies
+        dependency "com.esotericsoftware:kryo:${kryo_version}"
+        dependency "de.ruedigermoeller:fst:${fst_version}"
+        
+        // findbugs dependencies
+        dependencySet(group: "com.google.code.findbugs", version: "${findbugs_version}") {
+            entry "annotations"
+            entry "jsr305"
+        }
+        
+        // sftp dependencies
+        dependency "com.jcraft:jsch:${jsch_version}"
+        
+        // test
+        dependency "junit:junit:${junit_version}"
+        dependency "org.hamcrest:hamcrest-all:${hamcrest_version}"
+        dependency "org.mockito:mockito-core:${mockito_version}"
+        dependency "com.jayway.jsonpath:json-path:${jsonpath_version}"
+        dependency "org.seleniumhq.selenium:selenium-htmlunit-driver:${selenium_version}"
+        dependency "com.h2database:h2:${h2_version}"
+        dependency "com.github.kstyrc:embedded-redis:${embedded_redis_version}"
+        
+        // springfox dependencies
+        dependencySet(group: "io.springfox", version: "${springfox_version}") {
+            entry "springfox-swagger-ui"
+            entry "springfox-swagger2"
+            entry "springfox-staticdocs"
+        }
+        dependency "io.swagger:swagger-annotations:${swagger_annotations_version}"
+        dependency "org.asciidoctor:asciidoctorj:${asciidoctorj_version}"
+        
+        // spring-restdocs dependencies
+        dependency "org.springframework.restdocs:spring-restdocs-mockmvc:${spring_restdocs_version}"
+
+    }
+    
+}

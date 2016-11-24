@@ -1,0 +1,129 @@
+apply plugin: "maven-publish"
+//apply plugin: 'nebula-aggregate-javadocs'
+
+allprojects {
+	apply plugin: 'eclipse'
+	apply plugin: 'java'
+	apply plugin: 'maven'
+    apply plugin: "io.spring.dependency-management"
+
+	configurations.all {
+		resolutionStrategy {
+			cacheDynamicVersionsFor 0, 'seconds'
+			cacheChangingModulesFor 0, 'seconds'
+//          force 'asm:asm-all:3.3.1', 'commons-io:commons-io:1.4'
+//            force 'org.apache.zookeeper:zookeeper:3.4.8'
+		}
+        
+	}
+
+	javadoc {
+		options {
+			locale = 'zh_CN'
+			encoding = 'UTF-8'
+			docFilesSubDirs = true
+			failOnError = false
+			excludeDocFilesSubDir '.git'
+		}
+	}
+    
+    def javaSubprojects = rootProject.subprojects.findAll { 
+        subproject -> subproject.plugins.hasPlugin(JavaPlugin) 
+    }
+    
+    task aggregateJavadocs(type: Javadoc) {
+        description = 'Aggregates Javadoc API documentation of all subprojects.'
+        group = JavaBasePlugin.DOCUMENTATION_GROUP
+        dependsOn javaSubprojects.javadoc
+
+        source javaSubprojects.javadoc.source
+        destinationDir rootProject.file("$rootProject.buildDir/docs/javadoc")
+        classpath = rootProject.files(javaSubprojects.javadoc.classpath)
+        options {
+            locale = 'zh_CN'
+            encoding = 'UTF-8'
+            docFilesSubDirs = true
+            failOnError = false
+            excludeDocFilesSubDir '.git'
+        }
+    }
+
+    task sourceJar (type : Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+    
+	sourceCompatibility = javaVersion
+	targetCompatibility = javaVersion
+	
+	jar.manifest {
+		attributes('Implementation-Title': name,
+				'Implementation-Version': version,
+				'Built-By': System.getProperty('user.name'),
+				'Built-JDK': System.getProperty('java.version'),
+				'Source-Compatibility': sourceCompatibility,
+				'Target-Compatibility': targetCompatibility)
+	}
+	
+	sourceCompatibility = javaVersion
+	[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+	repositories { 
+		mavenLocal()
+
+		maven {
+			url groupUrl 
+		} 
+	}
+}
+
+ext.withXml = { pom ->
+    pom.withXml {
+    //  asNode().appendNode('description', 'A demonstration of Maven POM customization')
+        asNode().children().first() + {
+            resolveStrategy = Closure.DELEGATE_FIRST
+            name name
+            
+            description "The project of zxy-commons-dependency"
+            url "https://github.com/zhaoxunyong/zxy-commons-bom"
+            inceptionYear 2016
+            
+            scm {
+                url "https://github.com/zhaoxunyong/zxy-commons-bom.git"
+                connection "https://github.com/zhaoxunyong/zxy-commons-bom.git"
+                developerConnection "https://github.com/zhaoxunyong/zxy-commons-bom.git"
+            }
+            
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/license/LICENSE-2.0.txt'
+                    distribution 'repo'
+                    comments 'A business-friendly OSS license'
+                }
+            }
+            
+            organization {
+                name '赵训勇'
+                url 'https://github.com/zhaoxunyong'
+            }
+            
+            developers {
+                developer {
+                    id 'zhaoxunyong'
+                    name 'zhaoxunyong'
+                    email 'zhaoxunyong@qq.com'
+                    url "https://github.com/zhaoxunyong"
+                    // https://issues.gradle.org/browse/GRADLE-2719
+                    organizationUrl "https://github.com/zhaoxunyong"
+                }
+            }
+        }
+    }
+}
+
+// https://docs.gradle.org/current/dsl/org.gradle.api.tasks.wrapper.Wrapper.html
+// https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14'
+}
