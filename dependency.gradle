@@ -40,6 +40,8 @@ dependencyManagement {
         dependency "commons-net:commons-net:${commons_net_version}"
         // commons-io dependencies
         dependency "commons-io:commons-io:${commons_io_version}"
+        // commons-fileupload dependencies
+        dependency "commons-fileupload:commons-fileupload:${commons_fileupload_version}"
         // commons-codec dependencies
         dependency "commons-codec:commons-codec:${commons_codec_version}"
         // commons-cli dependencies
@@ -52,6 +54,9 @@ dependencyManagement {
         dependency "org.apache.commons:commons-exec:${commons_exec_version}"
         // commons-pool2 dependencies
         dependency "org.apache.commons:commons-pool2:${commons_pool2_version}"
+        
+        // poi dependencies
+        dependency "org.apache.poi:poi:${poi_version}"
         
         // jackson dependencies
         dependencySet(group: "com.fasterxml.jackson.core", version: "${jackson_version}") {
