@@ -7,14 +7,14 @@ dependencyManagement {
         dependencySet(group: "org.slf4j", version: "${slf4j_version}") {
             entry "slf4j-api"
             entry "slf4j-log4j12"
-            entry "log4j-over-slf4j"
+//            entry "log4j-over-slf4j"
         }
         
         // logback dependencies
-        dependencySet(group: "ch.qos.logback", version: "${logback_version}") {
-            entry "logback-access"
-            entry "logback-classic"
-        }
+//        dependencySet(group: "ch.qos.logback", version: "${logback_version}") {
+//            entry "logback-access"
+//            entry "logback-classic"
+//        }
         
         // guava dependencies
         dependency "com.google.guava:guava:${guava_version}"
@@ -96,10 +96,6 @@ dependencyManagement {
         // jedis dependencies
         dependency "redis.clients:jedis:${jedis_version}"
         
-        // spring-bom dependencies
-//        imports {
-//            mavenBom "org.springframework:spring-framework-bom:${spring_bom_version}"
-//        }
         // spring data redis dependencies
         dependency "org.springframework.data:spring-data-redis:${spring_data_redis_version}"
 
@@ -212,15 +208,6 @@ dependencyManagement {
         // sftp dependencies
         dependency "com.jcraft:jsch:${jsch_version}"
         
-        // test
-        dependency "junit:junit:${junit_version}"
-        dependency "org.hamcrest:hamcrest-all:${hamcrest_version}"
-        dependency "org.mockito:mockito-core:${mockito_version}"
-        dependency "com.jayway.jsonpath:json-path:${jsonpath_version}"
-        dependency "org.seleniumhq.selenium:selenium-htmlunit-driver:${selenium_version}"
-        dependency "com.h2database:h2:${h2_version}"
-        dependency "com.github.kstyrc:embedded-redis:${embedded_redis_version}"
-        
         // springfox dependencies
         dependencySet(group: "io.springfox", version: "${springfox_version}") {
             entry "springfox-swagger-ui"
@@ -233,6 +220,36 @@ dependencyManagement {
         // spring-restdocs dependencies
         dependency "org.springframework.restdocs:spring-restdocs-mockmvc:${spring_restdocs_version}"
 
+        // hystrix dependencies
+        dependencySet(group: "com.netflix.hystrix", version: "${hystrix_version}") {
+            entry "hystrix-core"
+            entry "hystrix-javanica"
+            entry "hystrix-metrics-event-stream"
+            entry "hystrix-request-servlet"
+        }
+
+        // turbine dependencies
+        dependency "com.netflix.turbine:turbine-core:${turbine_version}"
+
+        // brave dependencies
+        dependencySet(group: "io.zipkin.brave", version: "${brave_version}") {
+            entry "brave-core"
+            entry "brave-http"
+            entry "brave-spancollector-http"
+            entry "brave-okhttp"
+            entry "brave-mysql"
+            entry "brave-web-servlet-filter"
+            entry "brave-spring-web-servlet-interceptor"
+        }
+
+        // test
+        dependency "junit:junit:${junit_version}"
+        dependency "org.hamcrest:hamcrest-all:${hamcrest_version}"
+        dependency "org.mockito:mockito-core:${mockito_version}"
+        dependency "com.jayway.jsonpath:json-path:${jsonpath_version}"
+        dependency "org.seleniumhq.selenium:selenium-htmlunit-driver:${selenium_version}"
+        dependency "com.h2database:h2:${h2_version}"
+        dependency "com.github.kstyrc:embedded-redis:${embedded_redis_version}"
     }
     
 }
