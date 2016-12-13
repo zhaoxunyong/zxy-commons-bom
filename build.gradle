@@ -27,7 +27,9 @@ ext {
 
 dependencyManagement {
     imports {
-         mavenBom "org.springframework:spring-framework-bom:${spring_bom_version}"
+        mavenBom "org.springframework:spring-framework-bom:${spring_bom_version}"
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${spring_boot_dependencies_version}"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${spring_cloud_dependencies_version}"
     }
 }
 
